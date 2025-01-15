@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Checkbox3 Base Style -->
+    <style name="Base.ai.Widget.Checkbox3" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="ai_checkbox3_checkableCycle">@array/ai_checkbox3_cycleIndeterminate</item>
+        <item name="android:button">@drawable/ai_checkbox3_anim</item>
+        <item name="android:paddingLeft">@dimen/ai_checkbox3_text_gap</item>
+    </style>
+
+    <!-- CheckBox3 Default Style -->
+    <style name="ai.Widget.Checkbox3" parent="Base.ai.Widget.Checkbox3"/>
+
+</resources>

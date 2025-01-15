@@ -1,0 +1,96 @@
+apply plugin: 'com.android.library'
+
+def libName = 'ai-checkbox3'
+
+android {
+    namespace 'com.ai.android.checkbox3'
+
+    defaultConfig {
+        versionCode androidApplicationVersionCode
+        versionName androidApplicationVersionName
+
+        minSdk androidApplicationMinSdkVersion
+        compileSdk androidApplicationCompileSdkVersion
+        targetSdk androidApplicationTargetSdkVersion
+
+        archivesBaseName = "$libName-$versionName"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = javaSourceCompatibility
+        targetCompatibility = javaTargetCompatibility
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    lint {
+        abortOnError true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.13.2'
+
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+tasks.register("cleanArtifacts", Delete) {
+    delete fileTree(dir: "$artifactsDirectory" , include: "**/${libName}*.aar")
+    delete fileTree(dir: "$artifactsDirectory" , include: "**/${libName}*sources.jar")
+}
+
+clean.finalizedBy(cleanArtifacts)
+
+tasks.register("copyArtifacts") {
+    def buildDirectory = layout.buildDirectory.getAsFile().get()
+    def sourceRoot = "$buildDirectory/outputs/aar"
+
+    doFirst {
+        println "SOURCE: $sourceRoot"
+        println "TARGET: $artifactsDirectory"
+        println ""
+
+        copy {
+            from(fileTree(sourceRoot).files)
+            into(artifactsDirectory)
+            include("*.aar")
+
+            eachFile {
+                println "FILE: $it.relativeSourcePath -> $it.relativePath"
+            }
+        }
+    }
+}
+
+build.finalizedBy(copyArtifacts)
+
+tasks.register("generateSourcesJar") {
+    def sourcesRoot = "$projectDir/src/main/java"
+    def cmd = "jar cvf \"$artifactsDirectory/$archivesBaseName-sources.jar\" -C \"$sourcesRoot/\" com"
+
+    doFirst {
+        println "GENERATE SOURCES JAR"
+        println "SOURCES: $sourcesRoot"
+        println "CMD: $cmd"
+
+        exec {
+            commandLine 'cmd', '/c', cmd
+        }
+    }
+}
+
+copyArtifacts.finalizedBy(generateSourcesJar)

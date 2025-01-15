@@ -1,13 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
-        <!--<item name="android:textColorSecondary">@color/secondaryTextColor</item>-->
+        <item name="android:colorControlNormal">@android:color/black</item>
+    </style>
+
+    <style name="PCTEL_Checkbox_Style" parent="ai.Widget.Checkbox3">
+        <item name="android:colorPrimary">@color/primaryColor</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="android:colorAccent">@color/secondaryColor</item>
+        <item name="android:textColorSecondary">@android:color/black</item>
     </style>
 
 </resources>

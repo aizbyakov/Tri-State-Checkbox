@@ -1,0 +1,49 @@
+ext.getSignConfig = { tag, filePath ->
+	final emptySignConfig = null
+
+	final STORE_FILE_PAR = 'storeFile'
+	final STORE_PASSWORD_PAR = 'storePassword'
+	final KEY_ALIAS_PAR = 'keyAlias'
+	final KEY_PASSWORD_PAR = 'keyPassword'
+
+	def keystoreReleaseFile = new File(filePath)
+
+	if (keystoreReleaseFile.canRead()) {
+		println "Sign config: [$tag] config file has been found: $filePath"
+
+		def keystoreProperties = new Properties()
+		keystoreProperties.load(new FileInputStream(keystoreReleaseFile))
+
+		println "Sign config: [$tag] config file has been loaded"
+
+		if (keystoreProperties != null
+				&& keystoreProperties.containsKey(STORE_FILE_PAR)
+				&& keystoreProperties.containsKey(STORE_PASSWORD_PAR)
+				&& keystoreProperties.containsKey(KEY_ALIAS_PAR)
+				&& keystoreProperties.containsKey(KEY_PASSWORD_PAR)
+		) {
+			println "Sign config: [$tag] keys has been detected"
+
+			def signingConfig = {
+				keyAlias keystoreProperties[KEY_ALIAS_PAR]
+				keyPassword keystoreProperties[KEY_PASSWORD_PAR]
+				storeFile file(keystoreProperties[STORE_FILE_PAR])
+				storePassword keystoreProperties[STORE_PASSWORD_PAR]
+			}
+
+			println "Sign config: [$tag] config has been created"
+
+			return signingConfig
+		}
+		else {
+			println "Sign config: [$tag] config file has been corrupted"
+
+			return emptySignConfig
+		}
+	}
+	else {
+		println "Sign config: [$tag] config file has not been found or can\'t be read: $filePath"
+
+		return emptySignConfig
+	}
+}
