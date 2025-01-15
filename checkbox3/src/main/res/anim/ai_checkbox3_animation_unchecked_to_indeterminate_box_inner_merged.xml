@@ -4,14 +4,14 @@
     <set android:ordering="sequentially">
         <objectAnimator
                 android:duration="166"
-                android:interpolator="@interpolator/ai_checkbox3_checked_mtrl_animation_interpolator_1"
+                android:interpolator="@anim/ai_checkbox3_checked_mtrl_animation_interpolator_1"
                 android:propertyName="pathData"
                 android:valueFrom="@string/ai_checkbox3_path_unchecked"
                 android:valueTo="@string/ai_checkbox3_path_circle_centered"
                 android:valueType="pathType"/>
         <objectAnimator
                 android:duration="333"
-                android:interpolator="@interpolator/ai_checkbox3_checked_mtrl_animation_interpolator_1"
+                android:interpolator="@anim/ai_checkbox3_checked_mtrl_animation_interpolator_1"
                 android:propertyName="pathData"
                 android:valueFrom="@string/ai_checkbox3_square_not_rotated_center"
                 android:valueTo="@string/ai_checkbox3_path_indeterminate"

@@ -2,7 +2,7 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <objectAnimator
         android:duration="166"
-        android:interpolator="@interpolator/ai_checkbox3_unchecked_mtrl_animation_interpolator_1"
+        android:interpolator="@anim/ai_checkbox3_unchecked_mtrl_animation_interpolator_1"
         android:propertyName="pathData"
         android:valueFrom="@string/ai_checkbox3_path_indeterminate"
         android:valueTo="@string/ai_checkbox3_circle_bottom_left"
@@ -16,7 +16,7 @@
             android:valueTo="1.0" />
         <objectAnimator
             android:duration="33"
-            android:interpolator="@interpolator/ai_checkbox3_unchecked_mtrl_animation_interpolator_0"
+            android:interpolator="@anim/ai_checkbox3_unchecked_mtrl_animation_interpolator_0"
             android:propertyName="fillAlpha"
             android:valueFrom="1.0"
             android:valueTo="0.0" />
